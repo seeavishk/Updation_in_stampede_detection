@@ -1,4 +1,3 @@
-'use client'
 import WebSocketStream from "@/components/websocketStream";
 
 export default function LivePage() {
