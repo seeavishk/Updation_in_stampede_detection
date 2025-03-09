@@ -17,7 +17,7 @@ The project requires the following Python libraries:
 ## Usage
 1. Install the dependencies as mentioned above.
 2. Run the main script of the project to start execution.
-3. Follow the on-screen instructions for using the functionalities.
+3. Follow the on-screen instructions for using the functionalities. 
 
 ## Contributing
 Feel free to fork this repository and contribute by creating a pull request.
