@@ -41,41 +41,4 @@ const WebSocketStream: React.FC = () => {
 export default WebSocketStream;
 
 
-
-
-// import React from "react";
-// import { useWebSocket } from "../hooks/useWebSocket";
-
-// const WebSocketStream: React.FC = () => {
-//   const { frame, logs } = useWebSocket();
-
-
-//   return (
-//     <div className="flex flex-col items-center justify-center">
-//       <div>
-//         <h2 className="text-lg font-semibold">Live Video Stream</h2>
-//         {frame ? (
-//           <img
-//             src={frame}
-//             alt="Live Stream"
-//             className="w-full max-w-2xl rounded-lg shadow-lg"
-//           />
-//         ) : (
-//           <p>Waiting for video stream...</p>
-//         )}
-//       </div>
-//       <div className="w-1/4 ml-4 p-2 bg-gray-900 text-white text-xs h-64 overflow-y-auto rounded-lg shadow-lg">
-//         <h3 className="font-semibold mb-2">Logs</h3>
-//         <div className="space-y-1">
-//           {logs.map((log, index) => (
-//             <p key={index} className="break-words">
-//               {log}
-//             </p>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default WebSocketStream;
+  
