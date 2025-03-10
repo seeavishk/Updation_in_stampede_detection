@@ -114,7 +114,7 @@ class StampedeDetector:
         return detected_objects, bool(new_weapons)
     
     # Stampede ka probability calculate karega
-    def calculate_stampede_probability(self, people_count, movement_speed, panic_count, weapons):
+     def calculate_stampede_probability(self, people_count, movement_speed, panic_count, weapons):
         probability = 0.0
         if people_count > self.people_threshold:
             probability += 0.40 * min(people_count / self.people_threshold, 1.0)
@@ -159,3 +159,58 @@ class StampedeDetector:
             result.panic_expressions, result.weapons_detected, result.stampede_probability
         ]
         return result, boxes, logs 
+    
+###########################################################################################################################
+
+def check_camera_disruption(self, frame) -> bool:
+        """Check for camera disruption or blackout"""
+        current_time = time.time()
+        
+        # Check for darkness
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        brightness = np.mean(gray)
+        
+        # Only consider severe darkness as disruption
+        is_disrupted = brightness < 5  # Very strict darkness threshold
+        
+        if is_disrupted and not self.camera_disrupted:
+            # Show warning message on frame
+            overlay = frame.copy()
+            cv2.rectangle(overlay, (0, 0), (self.frame_width, self.frame_height), 
+                         (0, 0, 0), -1)  # Black background
+            
+            # Add warning text
+            warning_text = "CAMERA DISRUPTED - CHECK CONNECTION!"
+            font_scale = 1.5
+            thickness = 3
+            text_size = cv2.getTextSize(warning_text, self.font, font_scale, thickness)[0]
+            text_x = (self.frame_width - text_size[0]) // 2
+            text_y = (self.frame_height + text_size[1]) // 2
+            
+            # Draw text with red color
+            cv2.putText(overlay, warning_text, 
+                       (text_x, text_y), 
+                       self.font, font_scale, (0, 0, 255), thickness)
+            
+            # Add blinking effect
+            alpha = 0.7 + 0.3 * np.sin(current_time * 4)  # Blinking effect
+            cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
+            
+            # Show popup warning
+            self.show_popup_warning(100, camera_alert=True)
+            self.camera_disrupted = True
+        elif not is_disrupted:
+            self.camera_disrupted = False
+        
+        return is_disrupted
+
+    def _display_camera_alert(self):
+        """Enhanced camera disruption alert"""
+        messagebox.showwarning(
+            "Camera Alert", 
+            "Camera Disruption Detected!\n\n"
+            "• Camera feed is dark or disconnected\n"
+            "• Please check camera connection\n"
+            "• Ensure proper lighting conditions\n"
+            "• Contact technical support if needed"
+        )
